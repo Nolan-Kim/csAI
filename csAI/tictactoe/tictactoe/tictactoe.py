@@ -126,7 +126,7 @@ def dag(input,board):
     for _ in range(3):
         lr.append(board[_][_])
     for _ in range(3):
-        bingus = 3-_
+        bingus = 2-_
         rl.append(board[_][bingus])
     if lr == [input,input, input]:
         return True
