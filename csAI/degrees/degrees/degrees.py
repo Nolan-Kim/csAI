@@ -99,21 +99,20 @@ def shortest_path(source, target):
     start = Node(state=source, parent=None, action=None)
     frontier.add(start)
     explored = set()
-    print(target)
+    if source == target:
+        return []
 
     while True:
-
         #Nodes are composed of states, parents, and actions
         #states = person id
         #actions = movie id
-        #parents = last person id
+        #parents = last node
 
         #if the frontier is empty there is no solution, so return none
         if frontier.empty():
             return None
         
         #removes inital node
-        print("removes node")
         newNode = frontier.remove()
 
         #neighbors for person returns (movie id, person id)
@@ -129,8 +128,10 @@ def shortest_path(source, target):
             if isSolution(personId, target):
                 # TODO write the code to check if they match
                 #I hate myself so much i did all the code right, but I messe dup the last function and wasted like a day gooddamnist
-                raise Exception("yeah, we got it boys")
-                returnSolution(Node(state = personId, parent=newNode, action=movieId))
+                #print(f"the target is {target}")
+                #print(f"the source is {source}")
+                #print(returnSolution(Node(state = personId, parent=newNode, action=movieId)))
+                return returnSolution(Node(state = personId, parent=newNode, action=movieId))
             
             #if in explored, don't add to the frontier
             elif not(inExplored(explored, personId, movieId)):  
@@ -139,7 +140,6 @@ def shortest_path(source, target):
                 #if not in explored add to explored to avoid overlap
         
         explored.add(newNode.state)
-        print(f"added {newNode.state}")
         #adds the explored node to explored to avoid backtracking
         #I'm inputting the nodes more than once oopsies again agagaga maybe is checking solution
 
@@ -150,9 +150,7 @@ def inExplored(explored, personId, movieId):
     """
     for _ in range(len(explored)):
         if personId == list(explored)[_]:
-            print(f"{personId} is {list(explored)[_]}")
             return True
-    print(f"{personId} isn't in explored")
     return False
 
 def isSolution(dubious, target):
@@ -172,21 +170,34 @@ def returnSolution(solution):
     WHOOOO = []
     YEAH = []
     mrNode = solution
+    WHOOOO.append(solution.state)
     while True:
         if mrNode.parent == None:
             break
-        WHOOOO.append(mrNode.parent)
+        else:
+            #print(f"appending {mrNode.parent.state}")
+            WHOOOO.append(mrNode.parent.state)
         YEAH.append(mrNode.action)
         #hold on, check if node parents are set to a node and not the person ID should work?
         mrNode = mrNode.parent
-
-
+        #i'm so stupid I forgot to return something
+    #should remove the first term (i.e., the source)
+    #print(f"solution state: {solution.state}")
     WHOOOO.reverse()
     YEAH.reverse()
-    bigMan = []
+
+    #print(f"there are {len(WHOOOO)} people")
+    #print(f"the people in question are {WHOOOO}")
+    #print(f"there are {len(YEAH)} movies")
+    #print(f"umm what {WHOOOO[1:]}")
+    WHOOOO = WHOOOO[1:]
+    #print(f"the people are {WHOOOO}")
+
+
+    mrSolution = []
     for _ in range(len(YEAH)):
-        bigMan.append((WHOOOO[_].state, YEAH[_]))
-    return bigMan
+        mrSolution.append((YEAH[_], WHOOOO[_] ))
+    return mrSolution
 
 
 
