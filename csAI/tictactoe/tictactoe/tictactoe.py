@@ -45,15 +45,24 @@ def actions(board):
     #NOTE: starts from 0 (i.e., [0,1,2])
     #i is y
     #j is x
-    #probably call teh if terminal function to cut it off early
-    raise NotImplementedError
+    #scans for emptys probably?
+    #probably call teh if terminal function to cut it off early terminal function might be less efficient, maybe
+    posseActions = set()
+    for _ in range(len(board)):
+        for oopsies in range(len(_)):
+            if board[_][oopsies] == EMPTY:
+                posseActions.add(tuple(oopsies,_))
+    return posseActions
+
 
 
 def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
-    raise NotImplementedError
+    newBoard = board
+    newBoard[action[1]][action[0]] = player(board)
+    return newBoard
 
 
 def winner(board):
