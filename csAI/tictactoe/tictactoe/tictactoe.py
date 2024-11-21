@@ -104,13 +104,12 @@ def vert(input, board):
                 col1.append(_[oopsies])
             elif oopsies == 2:
                 col2.append(_[oopsies])
-    for crabunkula in range(3):
-        if col0 == [input,input, input]:
-            return True
-        elif col1 [input,input, input]:
-            return True
-        elif col2 [input,input, input]:
-            return True
+    if col0 == [input,input, input]:
+        return True
+    elif col1 == [input,input, input]:
+        return True
+    elif col2 == [input,input, input]:
+        return True
     return False
 
 def dag(input,board):
@@ -130,7 +129,7 @@ def dag(input,board):
         rl.append(board[_][bingus])
     if lr == [input,input, input]:
         return True
-    elif rl [input,input, input]:
+    elif rl == [input,input, input]:
         return True
     return False
 
