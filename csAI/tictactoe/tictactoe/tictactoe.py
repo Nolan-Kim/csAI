@@ -24,8 +24,19 @@ def player(board):
     """
     #probably call teh if terminal function to cut it off early
     #otherwise count up all the xs or os and then %
-    raise NotImplementedError
-
+    mrX = 0
+    mrO = 0
+    for _ in board:
+        for oopsies in _:
+            if oopsies == X:
+                mrX += 1
+            elif oopsies == O:
+                mrO += 1
+                #Do I need this maybe just count x's? the inefficient way I'm doin it ye
+    if mrX == mrO:
+        return X
+    else:
+        return O
 
 def actions(board):
     """
@@ -49,8 +60,12 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-    raise NotImplementedError
-
+    if won(X, board):
+        return X
+    elif won(O, board):
+        return O
+    else:
+        return None
 
 def terminal(board):
     """
@@ -150,8 +165,12 @@ def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    raise NotImplementedError
-
+    if won(X, board):
+        return 1
+    elif won(O, board):
+        return -1
+    else:
+        return 0
 
 def minimax(board):
     """
