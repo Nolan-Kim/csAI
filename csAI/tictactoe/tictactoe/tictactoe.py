@@ -185,4 +185,31 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
-    raise NotImplementedError
+    #x util is 1
+    #O util is -1
+    #if terminal returns the utility if not add to frontier?
+    newBoard = board
+    if terminal(board):
+        return utility(board)
+    currentPlayer = player(board)
+
+    if currentPlayer == X:
+        currentBest = float("-inf")
+        bestMove = (-10,-10)
+        for _ in actions(board):
+            newBoard[_[0]][_[1]] = X
+            if currentBest < minimax(newBoard):
+                currentBest = minimax(newBoard)
+                bestMove = _
+        return bestMove
+
+    else:
+        #player is O
+        bestMove = (10,10)
+        currentBest = float("inf")
+        for _ in actions(board):
+            newBoard[_[0]][_[1]] = O
+            if currentBest > minimax(newBoard):
+                currentBest = minimax(newBoard)
+                bestMove = _
+        return bestMove
