@@ -49,9 +49,9 @@ def actions(board):
     #probably call teh if terminal function to cut it off early terminal function might be less efficient, maybe
     posseActions = set()
     for _ in range(len(board)):
-        for oopsies in range(len(_)):
+        for oopsies in range(len(board[_])):
             if board[_][oopsies] == EMPTY:
-                posseActions.add(tuple(oopsies,_))
+                posseActions.add((_,oopsies))
     return posseActions
 
 

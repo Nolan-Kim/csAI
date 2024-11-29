@@ -76,6 +76,70 @@ def test_won():
                   [O,X,O],
                   [X,O,X]]) == False
 def test_tied():
+  #I think this works because this runs after the checks for if x wins
+  #this just checks if all spaces are filled
   assert t.tied([[X,O,X],
                 [O,X,O],
                 [X,O,X]]) == True
+  assert t.tied([[O,O,X],
+                [X,X,O],
+                [O,X,X]]) == True
+def test_player():
+  assert t.player(emptyBoard) == X
+  assert t.player([[X, EMPTY, EMPTY],
+                   [EMPTY, EMPTY, EMPTY],
+                   [EMPTY, EMPTY, EMPTY]]) == O
+  assert t.player([[X, O, EMPTY],
+                   [EMPTY, EMPTY, EMPTY],
+                   [EMPTY, EMPTY, EMPTY]]) == X
+  assert t.player([[X, O, X],
+                   [EMPTY, EMPTY, EMPTY],
+                   [EMPTY, EMPTY, EMPTY]]) == O
+  assert t.player([[X, O, X],
+                   [O, EMPTY, EMPTY],
+                   [EMPTY, EMPTY, EMPTY]]) == X
+  assert t.player([[X, O, X],
+                   [O, X, EMPTY],
+                   [EMPTY, EMPTY, EMPTY]]) == O
+  assert t.player([[X, O, X],
+                   [O, X, O],
+                   [EMPTY, EMPTY, EMPTY]]) == X
+  assert t.player([[X, O, X],
+                   [O, X, O],
+                   [X, EMPTY, EMPTY]]) == O
+  assert t.player([[X, O, X],
+                   [O, X, O],
+                   [X, O, EMPTY]]) == X
+  #just to check it returns something, technically don't know if it is O but logic reasons so
+  assert t.player([[X, O, X],
+                   [O, X, O],
+                   [X, O, X]]) == O
+def test_winner():
+  #kind of redundant, cause just won func but still bears test anyways
+  assert t.winner([[X,O,X],
+                  [O,X,O],
+                  [X,O,X]]) == X
+  assert t.winner([[X,O,X],
+                  [O,O,EMPTY],
+                  [X,O,X]]) == O
+def test_utility():
+  assert t.utility([[X,O,X],
+                  [O,X,O],
+                  [X,O,X]]) == 1
+  assert t.utility([[X,O,X],
+                  [O,O,EMPTY],
+                  [X,O,X]]) == -1
+  assert t.utility([[O,O,X],
+                    [X,X,O],
+                    [O,X,X]]) == 0
+def test_actions():
+  #test a lil moer buddy
+  assert t.actions(emptyBoard) == {(0,0),(0,1),(0,2),
+                                   (1,0),(1,1),(1,2),
+                                   (2,0),(2,1),(2,2)}
+  assert t.actions([[X,O,X],
+                    [O,EMPTY,EMPTY],
+                    [X,O,X]]) == {(1,1),(1,2)}
+  assert t.actions([[X, EMPTY, O],
+                    [EMPTY, X, EMPTY],
+                    [EMPTY, EMPTY, O]]) == {(0,1),(1,0),(1,2),(2,0),(2,1)}
