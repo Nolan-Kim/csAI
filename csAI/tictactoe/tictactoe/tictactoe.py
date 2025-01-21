@@ -185,31 +185,71 @@ def minimax(board):
     """
     Returns the optimal action for the current player on the board.
     """
+    print("just ran")
     #x util is 1
     #O util is -1
     #if terminal returns the utility if not add to frontier?
-    newBoard = board
+    #gonna create a new class and stuff
+    # class named mrGarvey takes parent and board and action?
+    #?? what am I doing what is mrGarvey
+    #found out mrGarvey is used for parent node, so I know when the initial board is bad
+
+    #psuedo code starts now
+    #gets board, checks if inital board is terminal if so end it
+    #if not check if terminal and who won
+    #god I'm too tired for this, maybe burn this and start again?
+    #start from beginning if terminal needs to return None
+    #basically if X's turn then its O's turn
+
+    #construction of possible board
+    #[[EMPTY,EMPTY,X],
+     #[EMPTY, O, EMPTY],
+     #[X, EMPTY, EMPTY]]
+    #best move is (1,0) or any blocking move (e.g., (0,1)
+    
+    #if initial board terminal return None
+    #if not terminal return bestMove(board)
+
+    #best move is the best move of the next person
+
+    #how to calc
+
+    #probably by using a terminal function
+
     if terminal(board):
-        return utility(board)
-    currentPlayer = player(board)
+        return False
 
-    if currentPlayer == X:
-        currentBest = float("-inf")
-        bestMove = (-10,-10)
+    if player(board) == X:
+        #x's turn
+        #maximize
+        bestUtil = float("-inf")
+        bestMove = ()
         for _ in actions(board):
-            newBoard[_[0]][_[1]] = X
-            if currentBest < minimax(newBoard):
-                currentBest = minimax(newBoard)
-                bestMove = _
+            newBoard = board
+            print(_[0])
+            print(_[1])
+            newBoard[_[0][_[1]]] = X
+            crab = minimax(newBoard)
+            if crab == None:
+                #funcy was terminal
+                util = utility(crab)
+                if util > bestUtil:
+                    bestUtil = util
+                    bestMove = _
         return bestMove
-
     else:
-        #player is O
-        bestMove = (10,10)
-        currentBest = float("inf")
+        #O's turn
+        #minimize
+        bestUtil = float("inf")
+        bestMove = ()
         for _ in actions(board):
-            newBoard[_[0]][_[1]] = O
-            if currentBest > minimax(newBoard):
-                currentBest = minimax(newBoard)
-                bestMove = _
+            newBoard = board
+            newBoard[_[0][1]] = O
+            crab = minimax(newBoard)
+            if crab == None:
+                #funcy was terminal
+                util = utility(crab)
+                if util < bestUtil:
+                    bestUtil = util
+                    bestMove = _
         return bestMove

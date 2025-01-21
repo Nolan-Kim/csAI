@@ -143,3 +143,22 @@ def test_actions():
   assert t.actions([[X, EMPTY, O],
                     [EMPTY, X, EMPTY],
                     [EMPTY, EMPTY, O]]) == {(0,1),(1,0),(1,2),(2,0),(2,1)}
+def test_minimax():
+  assert t.minimax([[X,O,X],
+                    [O,EMPTY,O],
+                    [X,O,X]]) == (1,1)
+  assert t.minimax([[X,O,EMPTY],
+                    [O,EMPTY,EMPTY],
+                    [X,O,X]]) == (1,1)
+  assert t.minimax([[X, EMPTY, X],
+                    [EMPTY, O, EMPTY],
+                    [EMPTY, O, X]]) == (0,1)
+  assert t.minimax([[X, EMPTY, X],
+                    [EMPTY, O, EMPTY],
+                    [EMPTY, O, X]]) == (0,1)
+  assert t.minimax([[O,O,X],
+                    [X,X,O],
+                    [O,X,X]]) == None
+  assert t.minimax([[EMPTY,EMPTY,X],
+                    [EMPTY, O, EMPTY],
+                    [X, EMPTY, EMPTY]]) == (1,0)
